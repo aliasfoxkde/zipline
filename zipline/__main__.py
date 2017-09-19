@@ -10,6 +10,7 @@ from zipline.utils.compat import wraps
 from zipline.data import bundles as bundles_module
 from zipline.utils.cli import Date, Timestamp
 from zipline.utils.run_algo import _run, load_extensions
+from zipline.utils.calendars import get_calendar
 
 try:
     __IPYTHON__
@@ -225,6 +226,8 @@ def run(ctx,
             "must specify exactly one of '-f' / '--algofile' or"
             " '-t' / '--algotext'",
         )
+
+    trading_calendar = get_calendar(trading_calendar)
 
     perf = _run(
         initialize=None,
